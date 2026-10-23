@@ -1,0 +1,475 @@
+#### plane1 rail1 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric-plane1: GPU-Server1-eth1"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:1:2:1:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric-plane1: GPU-Server2-eth1"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:1:2:2:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.1.1
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane1 rail2 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:1:2:3:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:1:2:4:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.1.2
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane1 rail3 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+
+
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:1:2:5:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:1:2:6:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.1.3
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane1 rail4 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:1:2:7:0:1/96 primary
+
+
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:1:2:8:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.1.4
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane2 rail1 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:2:2:1:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:2:2:2:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.2.1
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane2 rail2 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+
+
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:2:2:3:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:2:2:4:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.2.2
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane2 rail3 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+
+
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:2:2:5:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:2:2:6:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.2.3
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+#### plane2 rail4 ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 800G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:2:2:7:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:2:2:8:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+set / network-instance gpu-amd type ip-vrf
+set / network-instance gpu-amd admin-state enable
+set / network-instance gpu-amd description "Backend: backend-fabric"
+set / network-instance gpu-amd router-id 192.0.2.4
+set / network-instance gpu-amd interface ethernet-1/1/1.4097
+set / network-instance gpu-amd interface ethernet-1/1/2.4097
+
+
+## GPU-server1
+
+#!/bin/bash
+set -e
+
+configure_rail() {
+    local dev="$1" addr="$2" gw="$3" table="$4" priority="$5"
+
+    ip link set "$dev" up
+    ip -6 addr replace "$addr/96" dev "$dev"
+    ip -6 route replace default via "$gw" dev "$dev" table "$table"
+
+    ip -6 rule del priority "$priority" 2>/dev/null || true
+    ip -6 rule add priority "$priority" from "$addr/128" table "$table"
+}
+
+configure_rail eth1  fd00:2:13:1:2:1:0:2 fd00:2:13:1:2:1:0:1 101 1001
+configure_rail eth2  fd00:2:13:1:2:3:0:2 fd00:2:13:1:2:3:0:1 102 1002
+configure_rail eth3  fd00:2:13:1:2:5:0:2 fd00:2:13:1:2:5:0:1 103 1003
+configure_rail eth4  fd00:2:13:1:2:7:0:2 fd00:2:13:1:2:7:0:1 104 1004
+configure_rail eth10 fd00:2:13:2:2:1:0:2 fd00:2:13:2:2:1:0:1 105 1005
+configure_rail eth20 fd00:2:13:2:2:3:0:2 fd00:2:13:2:2:3:0:1 106 1006
+configure_rail eth30 fd00:2:13:2:2:5:0:2 fd00:2:13:2:2:5:0:1 107 1007
+configure_rail eth40 fd00:2:13:2:2:7:0:2 fd00:2:13:2:2:7:0:1 108 1008
+
+## GPU-Server-2
+
+#!/bin/bash
+set -e
+
+configure_rail() {
+    local dev="$1" addr="$2" gw="$3" table="$4" priority="$5"
+
+    ip link set "$dev" up
+    ip -6 addr replace "$addr/96" dev "$dev"
+    ip -6 route replace default via "$gw" dev "$dev" table "$table"
+
+    ip -6 rule del priority "$priority" 2>/dev/null || true
+    ip -6 rule add priority "$priority" from "$addr/128" table "$table"
+}
+
+configure_rail eth1  fd00:2:13:1:2:2:0:2 fd00:2:13:1:2:2:0:1 101 1001
+configure_rail eth2  fd00:2:13:1:2:4:0:2 fd00:2:13:1:2:4:0:1 102 1002
+configure_rail eth3  fd00:2:13:1:2:6:0:2 fd00:2:13:1:2:6:0:1 103 1003
+configure_rail eth4  fd00:2:13:1:2:8:0:2 fd00:2:13:1:2:8:0:1 104 1004
+configure_rail eth10 fd00:2:13:2:2:2:0:2 fd00:2:13:2:2:2:0:1 105 1005
+configure_rail eth20 fd00:2:13:2:2:4:0:2 fd00:2:13:2:2:4:0:1 106 1006
+configure_rail eth30 fd00:2:13:2:2:6:0:2 fd00:2:13:2:2:6:0:1 107 1007
+configure_rail eth40 fd00:2:13:2:2:8:0:2 fd00:2:13:2:2:8:0:1 108 1008

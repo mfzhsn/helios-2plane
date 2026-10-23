@@ -1,0 +1,74 @@
+plane1	rail1	ethernet-1/1/1	fd00:2:13:1:2:1:0:1/96	gpu-server1	eth1	fd00:2:13:1:2:1:0:2/96
+plane1	rail1	ethernet-1/1/2	fd00:2:13:1:2:2:0:1/96	gpu-server2	eth1	fd00:2:13:1:2:2:0:2/96
+plane1	rail2	ethernet-1/1/1	fd00:2:13:1:2:3:0:1/96	gpu-server1	eth2	fd00:2:13:1:2:3:0:2/96
+plane1	rail2	ethernet-1/1/2	fd00:2:13:1:2:4:0:1/96	gpu-server2	eth2	fd00:2:13:1:2:4:0:2/96
+plane1	rail3	ethernet-1/1/1	fd00:2:13:1:2:5:0:1/96	gpu-server1	eth3	fd00:2:13:1:2:5:0:2/96
+plane1	rail3	ethernet-1/1/2	fd00:2:13:1:2:6:0:1/96	gpu-server2	eth3	fd00:2:13:1:2:6:0:2/96
+plane1	rail4	ethernet-1/1/1	fd00:2:13:1:2:7:0:1/96	gpu-server1	eth4	fd00:2:13:1:2:7:0:2/96
+plane1	rail4	ethernet-1/1/2	fd00:2:13:1:2:8:0:1/96	gpu-server2	eth4	fd00:2:13:1:2:8:0:2/96
+						
+plane2	rail1	ethernet-1/1/1	fd00:2:13:2:2:1:0:1/96	gpu-server1	eth10	fd00:2:13:2:2:1:0:2/96
+plane2	rail1	ethernet-1/1/2	fd00:2:13:2:2:2:0:1/96	gpu-server2	eth10	fd00:2:13:2:2:2:0:2/96
+plane2	rail2	ethernet-1/1/1	fd00:2:13:2:2:3:0:1/96	gpu-server1	eth20	fd00:2:13:2:2:3:0:2/96
+plane2	rail2	ethernet-1/1/2	fd00:2:13:2:2:4:0:1/96	gpu-server2	eth20	fd00:2:13:2:2:4:0:2/96
+plane2	rail3	ethernet-1/1/1	fd00:2:13:2:2:5:0:1/96	gpu-server1	eth30	fd00:2:13:2:2:5:0:2/96
+plane2	rail3	ethernet-1/1/2	fd00:2:13:2:2:6:0:1/96	gpu-server2	eth30	fd00:2:13:2:2:6:0:2/96
+plane2	rail4	ethernet-1/1/1	fd00:2:13:2:2:7:0:1/96	gpu-server1	eth40	fd00:2:13:2:2:7:0:2/96
+plane2	rail4	ethernet-1/1/2	fd00:2:13:2:2:8:0:1/96	gpu-server2	eth40	fd00:2:13:2:2:8:0:2/96
+
+
+
+
+#### Rail configs sample ####
+
+set / interface ethernet-1/1 description "breakout-connector breakout-edge"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 breakout-mode num-breakout-ports 2
+set / interface ethernet-1/1 breakout-mode breakout-port-speed 400G
+
+set / interface ethernet-1/1/1 admin-state enable
+set / interface ethernet-1/1/1 ethernet flow-control receive false
+set / interface ethernet-1/1/1 subinterface 4097 type routed
+set / interface ethernet-1/1/1 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/1 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 address fd00:2:13:1:1:1:0:1/96 primary
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/1 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+
+set / interface ethernet-1/1/2 admin-state enable
+set / interface ethernet-1/1/2 ethernet flow-control receive false
+set / interface ethernet-1/1/2 subinterface 4097 type routed
+set / interface ethernet-1/1/2 subinterface 4097 description "Backend: backend-fabric Stripe: stripe2"
+set / interface ethernet-1/1/2 subinterface 4097 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ip-mtu 9000
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 address fd00:2:13:1:1:2:0:1/96 primary
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/1/2 subinterface 4097 ipv6 router-advertisement router-role router-lifetime 1800
+
+
+set / network-instance gpu-nvidia type ip-vrf
+set / network-instance gpu-nvidia admin-state enable
+set / network-instance gpu-nvidia description "Backend: backend-fabric"
+set / network-instance gpu-nvidia router-id 192.0.2.6
+set / network-instance gpu-nvidia interface ethernet-1/2/1.4097
+set / network-instance gpu-nvidia interface ethernet-1/2/2.4097

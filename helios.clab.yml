@@ -1,0 +1,129 @@
+name: helios
+prefix: ""
+
+topology:
+  nodes:
+    gpu-server1:
+      kind: linux
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.5
+      binds:
+        - configs/gpu-server1.sh:/tmp/gpu-server1.sh:ro
+      exec:
+        - sh /tmp/gpu-server1.sh
+
+    gpu-server2:
+      kind: linux
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.5
+      binds:
+        - configs/gpu-server2.sh:/tmp/gpu-server2.sh:ro
+      exec:
+        - sh /tmp/gpu-server2.sh
+
+    plane1-spine1:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane1-spine1.json
+
+    plane1-spine2:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane1-spine2.json
+    plane2-spine1:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane2-spine1.json
+    plane2-spine2:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane2-spine2.json
+
+    plane1-rail4:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane1-rail4.json
+    plane1-rail3:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane1-rail3.json
+    plane1-rail2:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane1-rail2.json
+    plane1-rail1:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane1-rail1.json
+    plane2-rail4:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane2-rail4.json
+    plane2-rail3:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane2-rail3.json
+    plane2-rail2:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane2-rail2.json
+    plane2-rail1:
+      kind: nokia_srlinux
+      type: ixr-h6
+      image: ghcr.io/nokia/srlinux:latest
+      license: license_26_7.txt
+      startup-config: configs/plane2-rail1.json
+
+  links:
+    - endpoints: [ "plane1-rail1:ethernet-1/1/1", "gpu-server1:eth1" ]
+    - endpoints: [ "plane1-rail2:ethernet-1/1/1", "gpu-server1:eth2" ]
+    - endpoints: [ "plane1-rail3:ethernet-1/1/1", "gpu-server1:eth3" ]
+    - endpoints: [ "plane1-rail4:ethernet-1/1/1", "gpu-server1:eth4" ]
+    - endpoints: [ "plane1-rail1:ethernet-1/10/1", "plane1-spine1:ethernet-1/1/1" ]
+    - endpoints: [ "plane1-rail2:ethernet-1/10/1", "plane1-spine1:ethernet-1/2/1" ]
+    - endpoints: [ "plane1-rail3:ethernet-1/10/1", "plane1-spine1:ethernet-1/3/1" ]
+    - endpoints: [ "plane1-rail4:ethernet-1/10/1", "plane1-spine1:ethernet-1/4/1" ]
+    - endpoints: [ "plane1-rail1:ethernet-1/10/2", "plane1-spine2:ethernet-1/1/1" ]
+    - endpoints: [ "plane1-rail2:ethernet-1/10/2", "plane1-spine2:ethernet-1/2/1" ]
+    - endpoints: [ "plane1-rail3:ethernet-1/10/2", "plane1-spine2:ethernet-1/3/1" ]
+    - endpoints: [ "plane1-rail4:ethernet-1/10/2", "plane1-spine2:ethernet-1/4/1" ]
+    - endpoints: [ "gpu-server1:eth10", "plane2-rail1:ethernet-1/1/1" ]
+    - endpoints: [ "gpu-server1:eth20", "plane2-rail2:ethernet-1/1/1" ]
+    - endpoints: [ "gpu-server1:eth30", "plane2-rail3:ethernet-1/1/1" ]
+    - endpoints: [ "gpu-server1:eth40", "plane2-rail4:ethernet-1/1/1" ]
+    - endpoints: [ "plane2-rail1:ethernet-1/10/1", "plane2-spine1:ethernet-1/1/1" ]
+    - endpoints: [ "plane2-rail2:ethernet-1/10/1", "plane2-spine1:ethernet-1/2/1" ]
+    - endpoints: [ "plane2-rail3:ethernet-1/10/1", "plane2-spine1:ethernet-1/3/1" ]
+    - endpoints: [ "plane2-rail4:ethernet-1/10/1", "plane2-spine1:ethernet-1/4/1" ]
+    - endpoints: [ "plane2-rail1:ethernet-1/10/2", "plane2-spine2:ethernet-1/1/1" ]
+    - endpoints: [ "plane2-rail2:ethernet-1/10/2", "plane2-spine2:ethernet-1/2/1" ]
+    - endpoints: [ "plane2-rail3:ethernet-1/10/2", "plane2-spine2:ethernet-1/3/1" ]
+    - endpoints: [ "plane2-rail4:ethernet-1/10/2", "plane2-spine2:ethernet-1/4/1" ]
+    - endpoints: [ "gpu-server2:eth1", "plane1-rail1:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth2", "plane1-rail2:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth3", "plane1-rail3:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth4", "plane1-rail4:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth10", "plane2-rail1:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth20", "plane2-rail2:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth30", "plane2-rail3:ethernet-1/1/2" ]
+    - endpoints: [ "gpu-server2:eth40", "plane2-rail4:ethernet-1/1/2" ]
